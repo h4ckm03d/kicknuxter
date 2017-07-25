@@ -2,6 +2,8 @@
 
 > Basecode cassava innovation front end
 
+Original setup based on [Nuxt.js](https://github.com/nuxt/nuxt.js)
+
 ## Build Setup
 
 ``` bash
@@ -18,5 +20,3 @@ $ npm start
 # generate static project
 $ npm run generate
 ```
-
-For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
