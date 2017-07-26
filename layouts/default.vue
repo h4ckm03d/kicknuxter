@@ -15,6 +15,7 @@
 
 import footc from '~/components/footc'
 import appnav from '~/components/AppNavDrawer'
+import { mapMutations } from 'vuex'
 
 export default {
   components: { footc, appnav },
@@ -26,20 +27,26 @@ export default {
       desktop: desktop
     }
   },
+  fetch({ store, params }) {
+    store.commit('todos/add', '--a')
+  },
   methods: {
     toggleNav() {
       this.open = !this.open
     },
     handleMenuChange() {
 
-    }
+    },
+    ...mapMutations({
+      add: 'todos/add'
+    })
   },
   computed: {
     isHomePage() {
       return this.$route.fullPath === '/index'
     },
     titleBar() {
-      return this.$store.state.tittleBar
+      return this.$store.state.todos.titleBar
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <mu-sub-header>{{this.$store.state.tittleBar}}</mu-sub-header>
+    <mu-sub-header>{{$store.state.todos.tittleBar}}</mu-sub-header>
     <mu-content-block>
       wekaweka
     </mu-content-block>
@@ -8,17 +8,29 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   data() {
     return {
       title: 'kapur barus'
     }
   },
-  fetch({ store, params }) {
-    store.commit('setTitleBar', 'this.title')
+  methods: {
+    ...mapMutations({
+      toggle: 'todos/add'
+    })
   },
-  mounted() {
-    this.$store.commit('setTitleBar', 'mounted')
+  fetch({ store, params }) {
+    store.commit('todos/add', '--a')
+  },
+  computed: {
+    isHomePage() {
+      return this.$route.fullPath === '/index'
+    },
+    titleBar() {
+      return this.$store.state.todos.titleBar
+    }
   }
 }
 </script>

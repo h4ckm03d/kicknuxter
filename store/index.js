@@ -5,8 +5,25 @@ const store = () => new Vuex.Store({
     tittleBar: ''
   },
   mutations: {
-    setTitleBar(state, { text }) {
-      state.tittleBar = text
+    setTitleBar(state, text) {
+      state.user = text || null
+    }
+  },
+  getters: {
+    tittleBar(state) {
+      return state.tittleBar
+    }
+  },
+  modules: {
+    todos: {
+      state: {
+        titleBar: 'adasd'
+      },
+      mutations: {
+        add(state, { text }) {
+          state.titleBar = text
+        }
+      }
     }
   }
 })
