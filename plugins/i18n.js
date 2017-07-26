@@ -15,12 +15,3 @@ export default ({ app, store }) => {
     }
   })
 }
-
-var array1 = [{ k: 'v1', v: 2 }, { k: 'v2', v: 2 }, { k: 'v3', v: 2 }]
-var array2 = {}
-array1.every(function (elem, idx, array) {
-  array2[elem.k] = elem.v
-  return true
-})
-console.log(array1)
-console.log(array2)
