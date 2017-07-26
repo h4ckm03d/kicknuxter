@@ -1,93 +1,71 @@
 <template>
   <div class="layout">
-    <div class="header">
-      <div class="logo">
-        Muse-UI
-      </div>
-      <div class="nav">
-        <mu-tabs :value="activeTab" @change="handleTabChange" class="tab">
-          <mu-tab value="tab1" title="Nav One"/>
-          <mu-tab value="tab2" title="Nav TwO"/>
-          <mu-tab value="tab3" title="Nav Three"/>
-        </mu-tabs>
-      </div>
-    </div>
+    <headc/>
     <div class="content">
-      <div class="breadcrumb">
-        <mu-breadcrumb>
-          <mu-breadcrumb-item href="/">Home</mu-breadcrumb-item>
-          <mu-breadcrumb-item href="/">VideoGame</mu-breadcrumb-item>
-          <mu-breadcrumb-item>Download</mu-breadcrumb-item>
-        </mu-breadcrumb>
-      </div>
+      <breadcrumb/>
       <div class="body">
         <nuxt/>
       </div>
     </div>
-    <div class="footer">
-      Muse-UI ©2017 Created by Muse-UI
-    </div>
+    <footc/>
   </div>
 </template>
 <script>
+
+import light from 'muse-ui/dist/theme-default.css'
+import dark from 'muse-ui/dist/theme-dark.css'
+import carbon from 'muse-ui/dist/theme-carbon.css'
+import teal from 'muse-ui/dist/theme-teal.css'
+import footc from '~/components/footc'
+import headc from '~/components/headc'
+import breadcrumb from '~/components/breadcrumb'
+
 export default {
-  data () {
+  components: { footc, headc, breadcrumb },
+  data() {
     return {
-      activeTab: 'tab1'
+      theme: 'light',
+      themes: {
+        light,
+        dark,
+        carbon,
+        teal
+      }
     }
   },
   methods: {
-    handleTabChange (val) {
-      this.activeTab = val
+    changeTheme(theme) {
+      this.theme = theme
+      const styleEl = this.getThemeStyle()
+      styleEl.innerHTML = this.themes[theme] || ''
+    },
+    getThemeStyle() {
+      const themeId = 'muse-theme'
+      let styleEl = document.getElementById(themeId)
+      if (styleEl) return styleEl
+      styleEl = document.createElement('style')
+      styleEl.id = themeId
+      document.body.appendChild(styleEl)
+      return styleEl
     }
   }
 }
 </script>
+</script>
 <style scoped>
-.layout{
+.layout {
   background-color: rgb(236, 236, 236);
 }
 
-.header{
-  background-color: #7e57c2;
-}
-
-.logo{
-  font-size: 24px;
-  color: white;
-  display: inline-block;
-  padding: 10px 20px;
-}
-
-.nav{
-  display: inline-block;
-  width: calc(100% - 150px);
-  margin: 0 auto;
-}
-
-.tab{
-  margin: 0 auto;
-  width: 400px;
-  background-color: rgba(0, 0, 0, 0);
-}
-
-.content{
+.content {
   width: 90%;
   margin: 0 auto;
 }
 
-.breadcrumb{
-  margin: 10px 0;
-}
-
-.body{
+.body {
   background-color: white;
   border-radius: 5px;
   min-height: 500px;
 }
 
-.footer{
-  padding: 20px 0;
-  text-align: center;
-}
 </style>
