@@ -1,71 +1,101 @@
 <template>
   <div class="layout">
-    <headc/>
-    <div class="content">
-      <breadcrumb/>
-      <div class="body">
-        <nuxt/>
-      </div>
+    <mu-appbar v-if="!isHomePage" :zDepth="0" :title="titleBar" class="cassava-appbar" :class="{'nav-hide': !open}">
+      <mu-icon-button @click="toggleNav" icon="menu" slot="left" />
+      <mu-icon-button slot="right" href="https://github.com/museui/muse-ui" icon="cloud_download" />
+    </mu-appbar>
+    <appnav v-if="!isHomePage" @change="handleMenuChange" @close="toggleNav" :open="open" :docked="docked" />
+    <div class="cassava-content" :class="{'nav-hide': !open, 'home-page': isHomePage}">
+      <nuxt/>
     </div>
     <footc/>
   </div>
 </template>
 <script>
 
-import light from 'muse-ui/dist/theme-default.css'
-import dark from 'muse-ui/dist/theme-dark.css'
-import carbon from 'muse-ui/dist/theme-carbon.css'
-import teal from 'muse-ui/dist/theme-teal.css'
 import footc from '~/components/footc'
-import headc from '~/components/headc'
-import breadcrumb from '~/components/breadcrumb'
+import appnav from '~/components/AppNavDrawer'
 
 export default {
-  components: { footc, headc, breadcrumb },
+  components: { footc, appnav },
   data() {
+    const desktop = true
     return {
-      theme: 'light',
-      themes: {
-        light,
-        dark,
-        carbon,
-        teal
-      }
+      open: desktop,
+      docked: desktop,
+      desktop: desktop
     }
   },
   methods: {
-    changeTheme(theme) {
-      this.theme = theme
-      const styleEl = this.getThemeStyle()
-      styleEl.innerHTML = this.themes[theme] || ''
+    toggleNav() {
+      this.open = !this.open
     },
-    getThemeStyle() {
-      const themeId = 'muse-theme'
-      let styleEl = document.getElementById(themeId)
-      if (styleEl) return styleEl
-      styleEl = document.createElement('style')
-      styleEl.id = themeId
-      document.body.appendChild(styleEl)
-      return styleEl
+    handleMenuChange() {
+
+    }
+  },
+  computed: {
+    isHomePage() {
+      return this.$route.fullPath === '/index'
+    },
+    titleBar() {
+      return this.$store.state.tittleBar
     }
   }
 }
-</script>
+
 </script>
 <style scoped>
-.layout {
-  background-color: rgb(236, 236, 236);
+.cassava-appbar {
+  position: fixed;
+  left: 256px;
+  right: 0;
+  top: 0;
+  width: auto;
+  transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.content {
-  width: 90%;
-  margin: 0 auto;
+.cassava-appbar.nav-hide {
+  left: 0;
 }
 
-.body {
-  background-color: white;
-  border-radius: 5px;
-  min-height: 500px;
+.cassava-content {
+  padding-top: 56px;
+  padding-left: 256px;
+  transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
+.cassava-content.nav-hide {
+  padding-left: 0;
+}
+
+.content-wrapper {
+  padding: 48px 72px;
+}
+
+@media (min-width: 480px) {
+  .cassava-content {
+    padding-top: 64px;
+  }
+}
+
+@media (max-width: 993px) {
+  .cassava-appbar {
+    left: 0;
+  }
+  .cassava-content {
+    padding-left: 0;
+  }
+  .content-wrapper {
+    padding: 24px 36px;
+  }
+}
+
+.home-page {
+  padding: 0;
+}
+
+.home-page .cassava-content {
+  transition-duration: 0s;
+}
 </style>

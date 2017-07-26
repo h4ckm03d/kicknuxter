@@ -1,55 +1,88 @@
 <template>
-  <div class="header">
-    <div class="logo">
-      Muse-UI
-    </div>
-    <div class="nav">
-      <mu-tabs :value="activeTab" @change="handleTabChange" class="tab">
-        <mu-tab value="tab1" title="Nav One" />
-        <mu-tab value="tab2" title="Nav TwO" />
-        <mu-tab value="tab3" title="Nav Three" />
-      </mu-tabs>
-    </div>
+  <div>
+    <mu-appbar v-if="!isHomePage" :zDepth="0" :title="title === 'index' ? '' : $t(title)" class="example-appbar" :class="{'nav-hide': !open}">
+      <mu-icon-button @click="toggleNav" icon="menu" slot="left" />
+      <mu-icon-button slot="right" href="https://github.com/museui/muse-ui" icon="cloud_download" />
+    </mu-appbar>
+    <appnav v-if="!isHomePage" @change="handleMenuChange" @close="toggleNav" :open="open" :docked="docked" />
   </div>
 </template>
 
 <script>
+import appnav from '~/components/AppNavDrawer'
+
 export default {
+  components: { appnav },
   data() {
     return {
-      activeTab: 'tab1'
+      open: false,
+      title: 'asdasd'
     }
   },
   methods: {
-    handleTabChange(val) {
-      this.activeTab = val
+    toggleNav() {
+      this.open = !this.open
+    }
+  },
+  computed: {
+    isHomePage() {
+      return this.$route.fullPath === '/index'
     }
   }
 }
 
 </script>
-
 <style>
-.header {
-  background-color: #7e57c2;
+.example-appbar {
+  position: fixed;
+  left: 256px;
+  right: 0;
+  top: 0;
+  width: auto;
+  transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.nav {
-  display: inline-block;
-  width: calc(100% - 150px);
-  margin: 0 auto;
+.example-appbar.nav-hide {
+  left: 0;
 }
 
-.tab {
-  margin: 0 auto;
-  width: 400px;
-  background-color: rgba(0, 0, 0, 0);
+.example-content {
+  padding-top: 56px;
+  padding-left: 256px;
+  transition: all 0.45s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.logo {
-  font-size: 24px;
-  color: white;
-  display: inline-block;
-  padding: 10px 20px;
+.example-content.nav-hide {
+  padding-left: 0;
+}
+
+.content-wrapper {
+  padding: 48px 72px;
+}
+
+@media (min-width: 480px) {
+  .example-content {
+    padding-top: 64px;
+  }
+}
+
+@media (max-width: 993px) {
+  .example-appbar {
+    left: 0;
+  }
+  .example-content {
+    padding-left: 0;
+  }
+  .content-wrapper {
+    padding: 24px 36px;
+  }
+}
+
+.home-page {
+  padding: 0;
+}
+
+.home-page .example-content {
+  transition-duration: 0s;
 }
 </style>
