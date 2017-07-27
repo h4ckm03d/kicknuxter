@@ -1,8 +1,8 @@
 <template>
   <section class="container">
-    <mu-sub-header>{{$store.state.tittleBar}}</mu-sub-header>
+    <mu-sub-header>Semprul huehue</mu-sub-header>
     <mu-content-block>
-      wekaweka
+      {{title}}
     </mu-content-block>
   </section>
 </template>
@@ -17,14 +17,6 @@ export default {
   },
   mounted() {
     this.$store.commit('SET_TITLEBAR', this.title)
-  },
-  computed: {
-    isHomePage() {
-      return this.$route.fullPath === '/index'
-    },
-    titleBar() {
-      return this.$store.state.todos.titleBar
-    }
   }
 }
 </script>

@@ -15,7 +15,7 @@
     </div>
     <mu-list :value="menuVal">
       <mu-list-item @change="handleMenuChange" :title="$t('getStarted')" toggleNested>
-        <mu-list-item slot="nested" :title="$t('installation')" to="/lemot"></mu-list-item>
+        <mu-list-item slot="nested" :title="$t('installation')" to="/lemot" value="/lemot"></mu-list-item>
       </mu-list-item>
     </mu-list>
   </mu-drawer>
@@ -70,25 +70,12 @@ export default {
       window.localStorage.setItem('lang', lang)
     }
   },
-  // mounted() {
-  //   // this.menuVal = window.location.hash
-  //   // window.addEventListener('hashchange', () => {
-  //   //   this.menuVal = window.location.hash
-  //   // })
-  //   // var xhr = new window.XMLHttpRequest()
-  //   // xhr.open('GET', '/version.json', true)
-  //   // xhr.onload = () => {
-  //   //   if (xhr.readyState === 4) {
-  //   //     if (xhr.status === 200) {
-  //   //       this.versions = JSON.parse(xhr.responseText)
-  //   //       console.log(this.versions, this.version)
-  //   //     } else {
-  //   //       console.error(xhr.statusText)
-  //   //     }
-  //   //   }
-  //   // }
-  //   // xhr.send()
-  // },
+  mounted() {
+    this.menuVal = this.$route.path
+    window.addEventListener('hashchange', () => {
+      this.menuVal = window.location.hash
+    })
+  },
   locales: {
     en
   }
