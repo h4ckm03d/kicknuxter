@@ -48,8 +48,9 @@ module.exports = {
     }
   },
   plugins: [
-    '~plugins/museui',
-    '~/plugins/i18n.js'
+    '~/plugins/museui',
+    '~/plugins/i18n.js',
+    '~/plugins/ga.js'
   ],
   render: {
     bundleRenderer: {
