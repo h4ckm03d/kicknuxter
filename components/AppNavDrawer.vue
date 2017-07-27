@@ -1,7 +1,7 @@
 <template>
   <mu-drawer @hide="handleHide" @close="handleClose" :open="open" :docked="docked" :overlay="docked" class="app-drawer" :zDepth="1">
     <mu-appbar :zDepth="0" class="exmaples-nav-appbar">
-      <a @click="handleMenuChange('#/index')" href="#/index" class="cassava-appbar-title">Muse-UI</a>
+      <nuxt-link to="/" class="cassava-appbar-title">Muse-UI</nuxt-link>
       <!-- <mu-badge content="rc" class="exmaples-version" secondary/> -->
     </mu-appbar>
     <mu-divider/>
@@ -13,11 +13,17 @@
         </mu-dropDown-menu>
       </div>
     </div>
+    <mu-list :value="menuVal">
+      <mu-list-item @change="handleMenuChange" :title="$t('getStarted')" toggleNested>
+        <mu-list-item slot="nested" :title="$t('installation')" to="/lemot"></mu-list-item>
+      </mu-list-item>
+    </mu-list>
   </mu-drawer>
 </template>
 
 <script>
 import en from '~/locales/en'
+import packageJson from '~/package.json'
 export default {
   props: {
     open: {
@@ -31,8 +37,8 @@ export default {
   },
   data() {
     return {
-      menuVal: '#/',
-      version: 'packageJson.version',
+      menuVal: '/',
+      version: packageJson.version,
       versions: []
     }
   },
@@ -89,25 +95,30 @@ export default {
 }
 </script>
 <style>
-.app-drawer{
+.app-drawer {
   display: flex;
   flex-direction: column;
 }
-.exmaples-nav-appbar.mu-appbar{
+
+.exmaples-nav-appbar.mu-appbar {
   flex-shrink: 0;
 }
-.cassava-appbar-title{
+
+.cassava-appbar-title {
   color: inherit;
   display: inline-block;
 }
+
 .exmaples-version {
   margin-left: 10px;
   vertical-align: text-top;
 }
+
 .exmaples-nav-sub-header {
   padding-left: 34px;
 }
-.mu-version-box{
+
+.mu-version-box {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -116,12 +127,14 @@ export default {
   padding-left: 16px;
   padding-right: 16px;
 }
+
 .mu-version-text {
   font-size: 16px;
   margin-top: 8px;
   width: 60px;
 }
-.mu-lang-box{
+
+.mu-lang-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
