@@ -1,31 +1,22 @@
 import Vuex from 'vuex'
 
-const store = () => new Vuex.Store({
-  state: {
-    tittleBar: ''
-  },
-  mutations: {
-    setTitleBar(state, text) {
-      state.user = text || null
-    }
-  },
-  getters: {
-    tittleBar(state) {
-      return state.tittleBar
-    }
-  },
-  modules: {
-    todos: {
-      state: {
-        titleBar: 'adasd'
-      },
-      mutations: {
-        add(state, { text }) {
-          state.titleBar = text
-        }
+const store = () => {
+  return new Vuex.Store({
+    state: {
+      titlebar: 'titlebar',
+      user: null
+    },
+    mutations: {
+      SET_TITLEBAR(state, text) {
+        state.titlebar = text || null
+      }
+    },
+    getters: {
+      titlebar(state) {
+        return state.titlebar
       }
     }
-  }
-})
+  })
+}
 
 export default store

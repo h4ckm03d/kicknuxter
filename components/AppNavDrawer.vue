@@ -5,7 +5,7 @@
       <!-- <mu-badge content="rc" class="exmaples-version" secondary/> -->
     </mu-appbar>
     <mu-divider/>
-    <div class="exmaple-drawer-content">
+    <div class="cassava-drawer-content">
       <div class="mu-version-box">
         <span class="mu-version-text">Version: </span>
         <mu-dropDown-menu :value="version" @change="handleVersionChange" v-if="versions.length > 0">

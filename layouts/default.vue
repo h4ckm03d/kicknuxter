@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <mu-appbar v-if="!isHomePage" :zDepth="0" :title="titleBar" class="cassava-appbar" :class="{'nav-hide': !open}">
+    <mu-appbar v-if="!isHomePage" :zDepth="0" :title="titlebar" class="cassava-appbar" :class="{'nav-hide': !open}">
       <mu-icon-button @click="toggleNav" icon="menu" slot="left" />
       <mu-icon-button slot="right" href="https://github.com/museui/muse-ui" icon="cloud_download" />
     </mu-appbar>
@@ -15,7 +15,7 @@
 
 import footc from '~/components/footc'
 import appnav from '~/components/AppNavDrawer'
-import { mapMutations } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   components: { footc, appnav },
@@ -27,27 +27,22 @@ export default {
       desktop: desktop
     }
   },
-  fetch({ store, params }) {
-    store.commit('todos/add', '--a')
-  },
   methods: {
     toggleNav() {
       this.open = !this.open
     },
     handleMenuChange() {
-
-    },
-    ...mapMutations({
-      add: 'todos/add'
-    })
+      this.$store.state.titleBar
+    }
   },
   computed: {
     isHomePage() {
       return this.$route.fullPath === '/index'
     },
     titleBar() {
-      return this.$store.state.todos.titleBar
-    }
+      return this.$store.state.titleBar
+    },
+    ...mapGetters(['titlebar'])
   }
 }
 
