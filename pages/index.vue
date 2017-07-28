@@ -17,6 +17,8 @@ export default {
   },
   mounted() {
     this.$store.commit('SET_TITLEBAR', this.title)
+    this.$store.commit('SET_LANG', 'fr')
+    Vue.config.lang = 'fr'
   }
 }
 </script>

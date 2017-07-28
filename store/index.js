@@ -4,11 +4,18 @@ const store = () => {
   return new Vuex.Store({
     state: {
       titlebar: 'titlebar',
-      user: null
+      user: null,
+      locales: ['en', 'fr'],
+      locale: 'en'
     },
     mutations: {
       SET_TITLEBAR(state, text) {
         state.titlebar = text || null
+      },
+      SET_LANG (state, locale) {
+        if (state.locales.indexOf(locale) !== -1) {
+          state.locale = locale
+        }
       }
     },
     getters: {

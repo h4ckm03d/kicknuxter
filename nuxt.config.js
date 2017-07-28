@@ -1,7 +1,7 @@
 module.exports = {
-  css: [
-    { src: 'muse-ui/dist/muse-ui.css', lang: 'css' }
-  ],
+  // css: [
+  //   { src: 'muse-ui/dist/muse-ui.css', lang: 'css' }
+  // ],
   script: [
     { src: 'muse-ui/dist/muse-ui.js', lang: 'js' }
   ],
@@ -17,6 +17,7 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', type: 'text/css', href: '/muse-ui.css' },
       { rel: 'stylesheet', type: 'text/css', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' },
       { rel: 'stylesheet', type: 'text/css', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' },
       { rel: 'stylesheet', type: 'text/css', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
@@ -59,5 +60,9 @@ module.exports = {
         maxAge: 1000 * 60 * 15
       })
     }
+  },
+  cache: {
+    max: 1000,
+    maxAge: 900000
   }
 }

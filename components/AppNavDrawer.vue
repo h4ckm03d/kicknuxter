@@ -13,8 +13,9 @@
         </mu-dropDown-menu>
       </div>
     </div>
-    <mu-list :value="menuVal">
-      <mu-list-item @change="handleMenuChange" :title="$t('getStarted')" toggleNested>
+    <mu-list  @change="handleMenuChange" :value="menuVal">
+      <mu-list-item :title="$t('getStarted')" toggleNested>
+        <mu-list-item slot="nested" :title="$t('about.title')" to="/" value="/"></mu-list-item>
         <mu-list-item slot="nested" :title="$t('installation')" to="/lemot" value="/lemot"></mu-list-item>
       </mu-list-item>
     </mu-list>
@@ -53,27 +54,22 @@ export default {
       this.$emit('close')
     },
     handleMenuChange(val) {
-      this.menuVal = val
-      if (this.docked) {
-        window.location.hash = this.menuVal
-      } else {
+      this.menuVal = this.$route.path
+      if (!this.docked) {
         this.changeHref = true
       }
       this.$emit('change', val)
     },
     handleHide() {
       if (!this.changeHref) return
-      window.location.hash = this.menuVal
       this.changeHref = false
-    },
-    changeLang(lang) {
-      window.localStorage.setItem('lang', lang)
     }
   },
   mounted() {
+    var self = this
     this.menuVal = this.$route.path
     window.addEventListener('hashchange', () => {
-      this.menuVal = window.location.hash
+      this.menuVal = self.$route.path
     })
   },
   locales: {
