@@ -9,7 +9,8 @@
     "lru-cache": "^4.1.1",
     "muse-ui": "^2.1.0",
     "nuxt": "latest",
-    "vue-i18n": "^7.0.5"
+    "vue-i18n": "^7.0.5",
+    "vue-kindergarten": "^0.3.1"
   },
   "scripts": {
     "dev": "nuxt",
