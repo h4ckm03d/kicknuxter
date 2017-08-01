@@ -1,18 +1,20 @@
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
-  env: {
-    browser: true,
-    node: true
+  parserOptions: {
+    ecmaVersion: 6
   },
-  extends: 'standard',
-  // required to lint *.vue files
-  plugins: [
-    'html'
+  env: {
+    node: true,
+    mocha: true
+  },
+  extends: [
+    'eslint:recommended',
+    "plugin:vue-libs/recommended",
   ],
-  // add your custom rules here
+  plugins: [
+    'eslint-plugin'
+  ],
   rules: {
     "space-before-function-paren": 0
-  },
-  globals: {}
+  }
 }

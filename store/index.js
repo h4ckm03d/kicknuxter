@@ -9,7 +9,7 @@ const store = () => {
       locale: 'en'
     },
     mutations: {
-      SET_TITLEBAR(state, text) {
+      SET_TITLEBAR (state, text) {
         state.titlebar = text || null
       },
       SET_LANG (state, locale) {
@@ -19,7 +19,7 @@ const store = () => {
       }
     },
     getters: {
-      titlebar(state) {
+      titlebar (state) {
         return state.titlebar
       }
     }
