@@ -64,5 +64,8 @@ module.exports = {
   cache: {
     max: 1000,
     maxAge: 900000
+  },
+  router: {
+    middleware: 'i18n'
   }
 }
