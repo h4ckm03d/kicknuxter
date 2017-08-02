@@ -48,7 +48,7 @@ module.exports = {
   plugins: [
     '~/plugins/museui',
     '~/plugins/i18n.js',
-    '~/plugins/ga.js'
+    { src: '~plugins/ga.js', ssr: false }
   ],
   render: {
     bundleRenderer: {

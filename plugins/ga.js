@@ -3,6 +3,7 @@ import router from 'vue-router'
 /*
 ** Only run on client-side and only in production mode
 */
+
 if (process.env.NODE_ENV === 'production') {
   /*
   ** Include Google Analytics Script

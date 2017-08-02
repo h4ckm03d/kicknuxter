@@ -5,15 +5,15 @@
       <!-- <mu-badge content="rc" class="exmaples-version" secondary/> -->
     </mu-appbar>
     <mu-divider/>
-    <div class="cassava-drawer-content">
-      <div class="mu-version-box">
-        <span class="mu-version-text">Version: </span>
-        <mu-dropDown-menu :value="version" @change="handleVersionChange" v-if="versions.length > 0">
-          <mu-menu-item v-for="vtext in versions" :key="'version-' + vtext" :value="vtext" :title="vtext" />
-        </mu-dropDown-menu>
-      </div>
-    </div>
-    <mu-list  @change="handleMenuChange" :value="menuVal">
+    <!-- <div class="cassava-drawer-content">
+        <div class="mu-version-box">
+          <span class="mu-version-text">Version: </span>
+          <mu-dropDown-menu :value="version" @change="handleVersionChange" v-if="versions.length > 0">
+            <mu-menu-item v-for="vtext in versions" :key="'version-' + vtext" :value="vtext" :title="vtext" />
+          </mu-dropDown-menu>
+        </div>
+      </div> -->
+    <mu-list @change="handleMenuChange" :value="menuVal">
       <mu-list-item :title="$t('getStarted')" toggleNested>
         <mu-list-item slot="nested" :title="$t('about.title')" to="/" value="/"></mu-list-item>
         <mu-list-item slot="nested" :title="$t('installation')" to="/lemot" value="/lemot"></mu-list-item>
@@ -44,12 +44,6 @@ export default {
     }
   },
   methods: {
-    handleVersionChange(val) {
-      if (val !== this.version) {
-        var url = this.versions.indexOf(val) === 0 ? '/' : '/' + val
-        window.open(url)
-      }
-    },
     handleClose() {
       this.$emit('close')
     },
@@ -66,11 +60,7 @@ export default {
     }
   },
   mounted() {
-    var self = this
     this.menuVal = this.$route.path
-    window.addEventListener('hashchange', () => {
-      this.menuVal = self.$route.path
-    })
   },
   locales: {
     en
